@@ -26,5 +26,5 @@ app.get("/prof/:_id", getProf)
 app.get("/prof", getProfs)
 
 app.listen(3000, () => {
-  console.log("listening on port 3000")
+  console.log("running!")
 })

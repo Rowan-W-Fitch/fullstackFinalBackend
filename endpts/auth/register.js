@@ -1,13 +1,13 @@
 const bcrypt = require('bcrypt')
-const saltRounds = 10;
-const end = '3PeakMatr!c3z'
+const saltRounds = process.env.salt || 10;
+const end = process.env.end || '3PeakMatr!c3z'
 const knex = require('knex')({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'postgres',
-    password : '',
-    database : 'fullstack'
+    host : process.env.DB_HOST || '127.0.0.1',
+    user : process.env.DB_USER || 'postgres',
+    password : process.env.DB_PASSWORD || '',
+    database : process.env.DATABASE || 'fullstack'
   }
 })
 
