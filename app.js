@@ -25,6 +25,6 @@ app.post("/prof", createProf)
 app.get("/prof/:_id", getProf)
 app.get("/prof", getProfs)
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("running!")
 })
