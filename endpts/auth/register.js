@@ -13,6 +13,7 @@ const knex = require('knex')({
 })
 
 module.exports = async(req, res) => {
+  console.log(saltRounds)
   const {username, password} = req.body
   //first use knex to check if user w/ username or email already exists
   let found = false;
