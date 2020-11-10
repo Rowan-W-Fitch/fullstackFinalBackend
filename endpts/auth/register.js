@@ -12,11 +12,11 @@ const knex = require('knex')({
 })
 
 module.exports = async(req, res) => {
-  const {username, email, password} = req.body
+  const {username, password} = req.body
   //first use knex to check if user w/ username or email already exists
   let found = false;
   try{
-    const exists = await knex.select('id').from('users').where('username', username).orWhere('email', email)
+    const exists = await knex.select('id').from('admin').where('username', username)
     console.log(exists)
     if(exists.length > 0) found = true
   }catch(e){
@@ -32,7 +32,7 @@ module.exports = async(req, res) => {
     return res
   }
   //generate token
-  const word = username.concat(email).concat(end)
+  const word = Math.random().toString().concat(username).concat(end)
   const token = await bcrypt.hash(word, saltRounds)
   if(!token){
     res.json({
@@ -43,9 +43,8 @@ module.exports = async(req, res) => {
   //if all good at this pt, create new user in db
   bcrypt.hash(password, saltRounds, async function(err, hash) {
     try{
-      await knex('users').insert({
+      await knex('admin').insert({
         username: username,
-        email: email,
         password: hash,
         token: token
       })

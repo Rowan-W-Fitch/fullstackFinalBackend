@@ -14,7 +14,7 @@ module.exports = async(req, res) => {
   const {username, password} = req.body
   let token
   //1st hash password and see if it matches anything in db
-  const pos = await knex.select('password', 'token').from('users').where('username', username).orWhere('email', username)
+  const pos = await knex.select('password', 'token').from('admin').where('username', username)
 
   for(let i=0; i<pos.length; i++){
     const crypt = pos[i]
