@@ -56,7 +56,17 @@ module.exports = async(req, res) => {
     return res
   }
   //check class doesn't already exist
-  const classExists = await knex.select("id").from("class").where("number", number).orWhere("name", name).orWhere("description", description).limit(1)
+  const classExists = await knex.select("id")
+    .from("class")
+    .where("number", number)
+    .andWhere("name", name)
+    .andWhere("description", description)
+    .andWhere("professor", prof)
+    .andWhere("days", days)
+    .andWhere("start", start)
+    .andWhere("end", end)
+    .limit(1)
+
   if(classExists && classExists.length > 0){
     res.json({
       error: "class already exists"
