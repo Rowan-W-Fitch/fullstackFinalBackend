@@ -25,6 +25,7 @@ module.exports = async(req, res) => {
     res.status(500).json({
       error: "bad db connection :("
     })
+    return res
   }
   //if user exists, then send back error
   if(found){
@@ -35,7 +36,7 @@ module.exports = async(req, res) => {
   }
   //generate token
   const word = Math.random().toString().concat(username).concat(end)
-  const token = await bcrypt.hash(word, saltRounds)
+  const token = bcrypt.hashSync(word, saltRounds)
   if(!token){
     res.json({
       error: "our bad here, sorry!"
@@ -55,6 +56,7 @@ module.exports = async(req, res) => {
       res.json({
         error: "bad db connection :("
       })
+      return res
     }
 
   })

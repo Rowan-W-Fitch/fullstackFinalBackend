@@ -19,7 +19,7 @@ module.exports = async(req, res) => {
 
   for(let i=0; i<pos.length; i++){
     const crypt = pos[i]
-    const same = await bcrypt.compare(password, crypt.password)
+    const same = bcrypt.compareSync(password, crypt.password)
     if(same) token = crypt.token
   }
 
