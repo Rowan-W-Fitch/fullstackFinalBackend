@@ -64,7 +64,7 @@ module.exports = async(req, res) => {
     .andWhere("professor", prof)
     .andWhere("days", days)
     .andWhere("start", start)
-    .andWhere("end", end)
+    .andWhere("over", over)
     .limit(1)
 
   if(classExists && classExists.length > 0){
