@@ -36,6 +36,7 @@ module.exports = async(req, res) => {
   }
   //generate token
   const word = Math.random().toString().concat(username).concat(end)
+  console.log(typeof saltRounds)
   const salt = bcrypt.genSaltSync(saltRounds)
   const token = bcrypt.hashSync(word, salt)
   if(!token){
