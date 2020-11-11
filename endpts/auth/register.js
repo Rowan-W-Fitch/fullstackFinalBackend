@@ -45,7 +45,7 @@ module.exports = async(req, res) => {
     return res
   }
   //if all good at this pt, create new user in db
-  bcrypt.hash(password, saltRounds, async function(err, hash) {
+  bcrypt.hash(password, parseInt(saltRounds), async function(err, hash) {
     try{
       await knex('admin').insert({
         username: username,
